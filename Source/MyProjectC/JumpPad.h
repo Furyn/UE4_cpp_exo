@@ -7,13 +7,13 @@
 #include "JumpPad.generated.h"
 
 UCLASS()
-class THIRDPERSONCPP_API AJumpPad : public AActor
+class ATestJumpPad : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AJumpPad();
+	ATestJumpPad();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,4 +23,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* StaticMesh;
 };
