@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FirstActor.h"
+#include "JumpPad.h"
 
 // Sets default values
-AFirstActor::AFirstActor()
+AJumpPad::AJumpPad()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,14 +12,14 @@ AFirstActor::AFirstActor()
 }
 
 // Called when the game starts or when spawned
-void AFirstActor::BeginPlay()
+void AJumpPad::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AFirstActor::Tick(float DeltaTime)
+void AJumpPad::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 

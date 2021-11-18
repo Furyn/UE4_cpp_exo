@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "FirstActor.generated.h"
+#include "JumpPad.generated.h"
 
 UCLASS()
-class MYPROJECTC_API AFirstActor : public AActor
+class THIRDPERSONCPP_API AJumpPad : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFirstActor();
+	AJumpPad();
 
 protected:
 	// Called when the game starts or when spawned
