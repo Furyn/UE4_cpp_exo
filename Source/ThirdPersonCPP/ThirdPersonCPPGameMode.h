@@ -13,6 +13,8 @@ class AThirdPersonCPPGameMode : public AGameModeBase
 
 public:
 	AThirdPersonCPPGameMode();
+	UFUNCTION()
+	void OnPlayerKilled(AController* Controller);
 };
 
 

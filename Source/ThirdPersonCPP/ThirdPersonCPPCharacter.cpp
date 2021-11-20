@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ThirdPersonCPPCharacter.h"
+#include "ThirdPersonCPPGameMode.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -56,16 +57,46 @@ AThirdPersonCPPCharacter::AThirdPersonCPPCharacter()
 
 void AThirdPersonCPPCharacter::ApplyHealthPoint(float Health_point)
 {
+	if(IsDead)
+		return;
 	Life += Health_point;
 	if(Life <= 0 && !IsDead)
 	{
 		IsDead = true;
 		Life = 0;
+		Die();
 	}else if (Life > Max_Life)
 	{
 		Life = Max_Life;
 	}
 	
+}
+
+void AThirdPersonCPPCharacter::Ragdoll()
+{
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetCollisionProfileName("Ragdoll");
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
+
+	FTimerHandle handle;
+	GetWorldTimerManager().SetTimer(handle,[this](){Destroy();},5.0f,false);
+}
+
+void AThirdPersonCPPCharacter::Die()
+{
+	Ragdoll();
+	FTimerHandle handle;
+	GetWorldTimerManager().SetTimer(handle,this,&AThirdPersonCPPCharacter::OnDie,3.0f,false);
+}
+
+void AThirdPersonCPPCharacter::OnDie()
+{
+	AGameModeBase* AuthGameMode = GetWorld()->GetAuthGameMode();
+	if(AThirdPersonCPPGameMode* GameMode = Cast<AThirdPersonCPPGameMode>(AuthGameMode) )
+	{
+		GameMode->OnPlayerKilled(GetController());
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

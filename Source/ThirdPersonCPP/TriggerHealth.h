@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ThirdPersonCPPCharacter.h"
 #include "GameFramework/Actor.h"
 #include "TriggerHealth.generated.h"
 
@@ -14,6 +15,15 @@ class THIRDPERSONCPP_API ATriggerHealth : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ATriggerHealth();
+	UPROPERTY(EditAnywhere)
+	int Dammage = 0;
+
+	UPROPERTY(EditAnywhere)
+	float TimerWait = 2.0f;
+    	
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* StaticMesh;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,5 +32,16 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	void HealtChange();
 
+	UFUNCTION()
+	void OnOverlapBegin(class AActor* OverlappedComp, class AActor* OtherActor);
+	
+	UFUNCTION()
+	void OnOverlapEnd(class AActor* OverlappedComp, class AActor* OtherActor);
+
+	AThirdPersonCPPCharacter* Player;
+	FTimerHandle TimerHandle;
+	
 };
