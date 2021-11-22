@@ -80,9 +80,17 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	void Grab();
+	void StopGrab();
+	
 	void Ragdoll();
 	void Die();
+	void Fire();
+	
+	UPROPERTY(EditAnywhere)
+	UClass* BulletActor;
 private:
 	void OnDie();
+	AActor* GrabActor;
 };
 
