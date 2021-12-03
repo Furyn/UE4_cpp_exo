@@ -2,17 +2,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Engine/TriggerBox.h"
 #include "LoadUnloadLevel.generated.h"
 
 UCLASS()
-class THIRDPERSONCPP_API ALoadUnloadLevel : public AActor
+class THIRDPERSONCPP_API ALoadUnloadLevel : public ATriggerBox
 {
 	GENERATED_BODY()
 	
 public:	
 	ALoadUnloadLevel();
-	UPROPERTY(VisibleAnywhere)
-    UStaticMeshComponent* StaticMesh;
     	
 	UPROPERTY(EditAnywhere)
 	TArray<FName> LayersToLoadOnBegin;
